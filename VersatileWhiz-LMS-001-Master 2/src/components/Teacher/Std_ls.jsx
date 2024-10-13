@@ -1,0 +1,147 @@
+import React, { useState } from "react";
+
+import { useOutletContext } from "react-router-dom";
+import './style.css'
+// Table Componant
+import { Link } from "react-router-dom";
+import Datatables from "../Datatables/Table";
+import TableCell from "../Datatables/TableCell";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil, faRemove } from "@fortawesome/free-solid-svg-icons";
+
+function StudentList() {
+  const [sidebarToggle] = useOutletContext();
+
+  const [loading] = useState(false);
+
+   const dataHeader = [
+    {
+      key: "name",
+      label: "Name",
+    },
+    {
+      key: "username",
+      label: "Email",
+    },
+    {
+      key: "email",
+      label: "Enrollment Time",
+    },
+    {
+      key: "country",
+      label: "Roll No",
+    },
+    {
+      key: "Status",
+      label: "Age",
+    },
+    {
+      key: "address",
+      label: "Status",
+    },
+    {
+      key: "action",
+      label: "Action",
+    },
+  ];
+
+  const data = [ {
+    id: 1,
+    name: "Shoaib",
+    email: "shoaib123@gmail.com",
+    username: "12/1/2023, 4:29:48 PM",
+    country: "20",
+    address: "21",
+    roles: [{ name: "Pass" }],
+  }];
+  return (
+    <>
+    <div className="mainCard">
+        <h2 className="lg:text-2xl text-1xl font-semibold text-gray-600 mb-3" >Students List.</h2>
+          <div className="border w-full border-gray-200 bg-white py-4 px-6 rounded-md">
+         
+          <div className="bg-white mt-6 mx-2 rounded-xl">
+            <Datatables loading={loading} dataHeader={dataHeader}>
+              {data?.map((row, index) => (
+                <tr
+                  key={index}
+                  className="bg-white border md:border-b block md:table-row rounded-md shadow-md md:rounded-none md:shadow-none mb-5"
+                >
+                  <TableCell dataLabel="Trx Hash" showLabel={true}>
+                    <span className="font-medium text-sm text-gray-900">
+                      {row.name}
+                    </span>
+                  </TableCell>
+                  <TableCell dataLabel="Timestamp" showLabel={true}>
+                    <p className="font-normal text-sm text-gray-500">{row.email}</p>
+                  </TableCell>
+                  <TableCell dataLabel="Block" showLabel={true}>
+                    <p className="font-normal text-sm text-gray-500">{row.username}</p>
+                  </TableCell>
+                  <TableCell dataLabel="From" showLabel={true}>
+                    <p className="font-normal text-sm text-gray-500">{row.country}</p>
+                  </TableCell>
+                  <TableCell dataLabel="To" showLabel={true}>
+                    <p className="font-normal text-sm text-gray-500">{row.address}</p>
+                  </TableCell>
+                  <TableCell dataLabel="Value" showLabel={true}>
+                    <span className="space-x-1">
+                      {/* {row.roles?.map((role, index) => (
+                        <span
+                          key={index}
+                          className="rounded-full py-1 px-3 text-xs font-semibold"
+                        >
+                          {role.name}
+                        </span>
+                      ))} */}
+                      <div className="toggler">
+                        <input id="toggler-1" name="toggler-1" type="checkbox" defaultValue={1} />
+                        <label htmlFor="toggler-1">
+                          <svg
+                            className="toggler-on"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 130.2 130.2"
+                          >
+                            <polyline
+                              className="path check"
+                              points="100.2,40.2 51.5,88.8 29.8,67.5"
+                            />
+                          </svg>
+                          <svg
+                            className="toggler-off"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 130.2 130.2"
+                          >
+                            <line className="path line" x1="34.4" y1="34.4" x2="95.8" y2="95.8" />
+                            <line className="path line" x1="95.8" y1="34.4" x2="34.4" y2="95.8" />
+                          </svg>
+                        </label>
+                      </div>
+
+
+                    </span>
+                  </TableCell>
+                  <TableCell dataLabel="Value" showLabel={true}>
+                    <span className="space-x-1">
+                    
+                    <span
+                            className="rounded-full py-1 px-3 text-xs font-semibold bg-red-400 text-black-900 cursor-pointer"
+                          >
+                            Delete 
+                          </span>
+
+                    </span>
+                  </TableCell>
+                </tr>
+              ))}
+            </Datatables>
+          </div>
+          </div>
+        </div>
+    </>
+  );
+}
+
+export default StudentList;
